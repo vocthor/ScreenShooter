@@ -1,6 +1,6 @@
 ## TO DO
 
-* Path implementation
+* Path implementation 	=> ABSOLUTE PATH MUST BE LIKE "F:\INFO\JAVA\ScreenShotProject\Output\"
 * Taking captures of a specific screen zone
 * Tab at the bottom with 2 tabs :
     - text zone that shows what happened (the sysout)  DONE
