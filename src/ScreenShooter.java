@@ -72,7 +72,7 @@ public class ScreenShooter {
     public void capture() {
         BufferedImage img = robot.createScreenCapture(rect);
         try {
-            ImageIO.write(img, "JPG", new File("Output/"+ date +"_"+ name +"_"+ number + ".jpg"));
+            ImageIO.write(img, "JPG", new File(path+ date +"_"+ name +"_"+ number + ".jpg"));
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
