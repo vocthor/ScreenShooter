@@ -46,7 +46,7 @@ public class UIControleur implements Initializable {
         time = new Timer();
         time.schedule (new TimerTask(){
             public void run () {
-                displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
+                //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
                 sc.capture();
                 System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
             }
