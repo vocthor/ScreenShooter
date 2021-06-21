@@ -6,15 +6,7 @@
 * Tab at the bottom with 2 tabs :
     - text zone that shows what happened (the sysout) 
     - last capture taken
-
-
-				<Tab text="Capture">
-					<tooltip><Tooltip text="Time between each capture" /></tooltip>
-					<ImageView fx:id="displayCapture" />
-				</Tab>
-
-
-
+* Check if name is valid or already taken
 * Specific window capture (even if in the background)
 * New window feature for simultaneous captures
 * Taking manually a capture in the middle of the session without stopping the automatic captures

@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -11,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 public class UIControleur implements Initializable {
     @FXML private Button startCaptureButton;
@@ -18,6 +21,7 @@ public class UIControleur implements Initializable {
     @FXML private Button pauseCaptureButton;
     @FXML private Button stopCaptureButton;
     @FXML private Button newWinButton;
+    @FXML private Button browseButton;
     @FXML private TextField pathTextField;
     @FXML private TextField nameTextField;
     @FXML private Spinner<Integer> capturePeriodSpinner;
@@ -30,9 +34,11 @@ public class UIControleur implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        startCaptureButton.setDisable(true);
         pauseCaptureButton.setDisable(true);
         stopCaptureButton.setDisable(true);
         sc = new ScreenShooter(null, null);
+        displayTextArea.appendText("You should read the README.md file for how to use this program and more ! \n");
     }
 
     @FXML
@@ -55,9 +61,16 @@ public class UIControleur implements Initializable {
 
     @FXML 
     void chosenPath (ActionEvent event){
-        sc.setPath(pathTextField.getText());
-        displayTextArea.appendText("Path set to \""+sc.getPath()+"\" \n");
-        System.out.println("Path set to \""+sc.getPath()+"\"");
+        File pathFile = new File(pathTextField.getText());
+        if(pathFile.isDirectory() && pathFile.canWrite()){
+            sc.setPath(pathTextField.getText());
+            displayTextArea.appendText("Path set to \""+sc.getPath()+"\" \n");
+            System.out.println("Path set to \""+sc.getPath()+"\"");
+            startCaptureButton.setDisable(false);
+        }else {
+            displayTextArea.appendText("The directory is either inaccessible either unwritable ! \n");
+            System.out.println("The directory is either inaccessible either unwritable !");
+        }
     }
 
     @FXML 
@@ -97,7 +110,6 @@ public class UIControleur implements Initializable {
         time.cancel();
         pauseCaptureButton.setDisable(true);
         stopCaptureButton.setDisable(true);
-        startCaptureButton.setDisable(false);
         lockParameters(false);
         pathTextField.clear();
         nameTextField.clear();
@@ -107,8 +119,17 @@ public class UIControleur implements Initializable {
 
     @FXML
     void newWindow (ActionEvent event){
-        displayTextArea.appendText("New Window feature is not implemented yet");
+        displayTextArea.appendText("New Window feature is not implemented yet \n");
         System.out.println("New Window feature is not implemented yet");
+    }
+
+    @FXML
+    void selectDirectory (ActionEvent event){
+        displayTextArea.appendText("Select where to store the captures \n");
+        DirectoryChooser dc = new DirectoryChooser();
+        dc.setTitle("Select where to store the captures");
+        File sd = dc.showDialog(new Stage());
+        pathTextField.appendText(sd.getAbsolutePath()+"\\");
     }
 
     private void lockParameters (boolean b){
@@ -116,5 +137,6 @@ public class UIControleur implements Initializable {
         pathTextField.setDisable(b);
         saveChangesButton.setDisable(b);
         capturePeriodSpinner.setDisable(b);
+        browseButton.setDisable(b);
     }
 }

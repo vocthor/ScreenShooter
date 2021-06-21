@@ -12,13 +12,14 @@
 			<VBox spacing="5">
 				<HBox spacing="5">
 					<Label text="Path :" />
-					<TextField fx:id="pathTextField" onAction="#chosenPath" prefWidth="400.0">
+					<TextField fx:id="pathTextField" onAction="#chosenPath" prefWidth="393.0">
 						<tooltip><Tooltip text="Where to store the captures (Must be like C:\Users\UserName\Folder\...) " /></tooltip>
 					</TextField>
+					<Button text="Browse" fx:id="browseButton" onAction="#selectDirectory" />
 				</HBox>
 				<HBox spacing="5">
 					<Label text="Name :" />
-					<TextField fx:id="nameTextField" onAction="#chosenName" prefWidth="400.0">
+					<TextField fx:id="nameTextField" onAction="#chosenName" prefWidth="445.0">
 						<tooltip><Tooltip text="Generic name for the next screen shots" /></tooltip>
 					</TextField>
 				</HBox>
