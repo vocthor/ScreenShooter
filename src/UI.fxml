@@ -47,6 +47,10 @@
 				<Tab text="Console">
 					<TextArea fx:id="displayTextArea" editable="false" />
 				</Tab>
+				<Tab text="Capture">
+					<tooltip><Tooltip text="Last capture taken" /></tooltip>
+					<ImageView fx:id="displayCapture" />
+				</Tab>
 			</TabPane>
 		</VBox>
 	</bottom>

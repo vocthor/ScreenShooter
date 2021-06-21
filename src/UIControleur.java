@@ -107,7 +107,8 @@ public class UIControleur implements Initializable {
 
     @FXML
     void newWindow (ActionEvent event){
-        System.out.println("New Window");
+        displayTextArea.appendText("New Window feature is not implemented yet");
+        System.out.println("New Window feature is not implemented yet");
     }
 
     private void lockParameters (boolean b){
