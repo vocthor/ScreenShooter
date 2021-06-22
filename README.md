@@ -13,11 +13,9 @@ A lot of features are not implemented yet, and are still in development, but for
  - `Start Capture` : starts the capture session. You can't change the parameters while capturing.
  - `Pause Capture` : pauses the capture session. You can't change the parameters. Press `Start Capture` to resume the current capture session.
  - `Stop Capture` : stops the capture session. Reset the `Path`, `Name`, and `Period` parameters.
- - `New Window` :  not implemented yet.
  - `Console` : just a tab where you can see the run of the program.
- - `Capture` : not implemented yet.
-
-
+ 
+ 
 ## How to use
 
  - Enter a valid absolute path, a generic name (not mandatory), and set up the time period.
