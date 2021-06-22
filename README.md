@@ -1,6 +1,7 @@
 ## Disclaimer
 
 This program is still in development, and i'm not a genius. I am not responsible for a bad use. If you discover a new bug, problem, ... or have an idea for a new feature, please report it.
+A lot of features are not implemented yet, and are still in development, but for now this program is functional for a basic use.
 
 
 ## Parameters
@@ -25,6 +26,9 @@ This program is still in development, and i'm not a genius. I am not responsible
  - Pause / Stop the capture session
 
 
-## Dependency Management
+## Not implemented features yet
 
-The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
+* `File` and `Monitor` menus
+* `Capture` tab
+* Better console
+

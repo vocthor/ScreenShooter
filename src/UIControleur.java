@@ -53,7 +53,7 @@ public class UIControleur implements Initializable {
         time.schedule (new TimerTask(){
             public void run () {
                 //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
-                sc.capture();
+                sc.capturePrimaryScreen();
                 System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
             }
         },0,sc.getPeriod());
@@ -71,6 +71,15 @@ public class UIControleur implements Initializable {
             displayTextArea.appendText("The directory is either inaccessible either unwritable ! \n");
             System.out.println("The directory is either inaccessible either unwritable !");
         }
+    }
+
+    @FXML
+    void selectDirectory (ActionEvent event){
+        displayTextArea.appendText("Select where to store the captures \n");
+        DirectoryChooser dc = new DirectoryChooser();
+        dc.setTitle("Select where to store the captures");
+        File sd = dc.showDialog(new Stage());
+        pathTextField.appendText(sd.getAbsolutePath()+"\\");
     }
 
     @FXML 
@@ -124,12 +133,9 @@ public class UIControleur implements Initializable {
     }
 
     @FXML
-    void selectDirectory (ActionEvent event){
-        displayTextArea.appendText("Select where to store the captures \n");
-        DirectoryChooser dc = new DirectoryChooser();
-        dc.setTitle("Select where to store the captures");
-        File sd = dc.showDialog(new Stage());
-        pathTextField.appendText(sd.getAbsolutePath()+"\\");
+    void selectCaptureZone (ActionEvent event){
+        displayTextArea.appendText("Option feature is not implemented yet \n");
+        System.out.println("Option feature is not implemented yet");
     }
 
     private void lockParameters (boolean b){

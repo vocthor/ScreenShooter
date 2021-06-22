@@ -69,7 +69,7 @@ public class ScreenShooter {
         period=n;
     }
 
-    public void capture() {
+    public void capturePrimaryScreen() {
         BufferedImage img = robot.createScreenCapture(rect);
         try {
             ImageIO.write(img, "JPG", new File(path+ date +"_"+ name +"_"+ number + ".jpg"));

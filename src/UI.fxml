@@ -8,31 +8,46 @@
 <BorderPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
 			fx:controller="UIControleur">	
 	<top>
-		<ToolBar>
-			<VBox spacing="5">
-				<HBox spacing="5">
-					<Label text="Path :" />
-					<TextField fx:id="pathTextField" onAction="#chosenPath" prefWidth="393.0">
-						<tooltip><Tooltip text="Where to store the captures (Must be like C:\Users\UserName\Folder\...) " /></tooltip>
-					</TextField>
-					<Button text="Browse" fx:id="browseButton" onAction="#selectDirectory" />
-				</HBox>
-				<HBox spacing="5">
-					<Label text="Name :" />
-					<TextField fx:id="nameTextField" onAction="#chosenName" prefWidth="445.0">
-						<tooltip><Tooltip text="Generic name for the next screen shots" /></tooltip>
-					</TextField>
-				</HBox>
-				<HBox spacing="5">
-					<Label text="Period (milliseconds)" />
-					<Spinner fx:id="capturePeriodSpinner" min="1" max="60000" initialValue="3000" amountToStepBy="1" editable="true" >
-						<tooltip><Tooltip text="Time between each capture" /></tooltip>
-					</Spinner>
-					<Pane HBox.hgrow="ALWAYS" />
-					<Button text="Save Changes" fx:id="saveChangesButton" onAction="#saveChanges" />
-				</HBox>
-			</VBox>
-		</ToolBar>
+		<VBox>
+			<MenuBar>
+				<Menu text="File">
+					<MenuItem text="New Window" onAction="#newWindow" />
+				</Menu>
+				<Menu text="Monitor">
+					<fx:define>
+        				<ToggleGroup fx:id="monitorGroup" />
+    				</fx:define>
+					<RadioMenuItem text="Primary Monitor" toggleGroup="$monitorGroup" selected="true"/>
+					<RadioMenuItem text="All Monitors" toggleGroup="$monitorGroup" />
+					<RadioMenuItem text="Selected Area" toggleGroup="$monitorGroup" onAction="#selectCaptureZone" />
+				</Menu>
+			</MenuBar>
+			<ToolBar>
+				<VBox spacing="5">
+					<HBox spacing="5">
+						<Label text="Path :" />
+						<TextField fx:id="pathTextField" onAction="#chosenPath" prefWidth="393.0">
+							<tooltip><Tooltip text="Where to store the captures (Must be like C:\Users\UserName\Folder\...) " /></tooltip>
+						</TextField>
+						<Button text="Browse" fx:id="browseButton" onAction="#selectDirectory" />
+					</HBox>
+					<HBox spacing="5">
+						<Label text="Name :" />
+						<TextField fx:id="nameTextField" onAction="#chosenName" prefWidth="445.0">
+							<tooltip><Tooltip text="Generic name for the next screen shots" /></tooltip>
+						</TextField>
+					</HBox>
+					<HBox spacing="5">
+						<Label text="Period (milliseconds)" />
+						<Spinner fx:id="capturePeriodSpinner" min="1" max="60000" initialValue="3000" amountToStepBy="1" editable="true" >
+							<tooltip><Tooltip text="Time between each capture" /></tooltip>
+						</Spinner>
+						<Pane HBox.hgrow="ALWAYS" />
+						<Button text="Save Changes" fx:id="saveChangesButton" onAction="#saveChanges" />
+					</HBox>
+				</VBox>
+			</ToolBar>
+		</VBox>
 	</top>
 	<center>
 		<HBox spacing="10" alignment="CENTER">
@@ -42,8 +57,7 @@
 		</HBox>
 	</center>
 	<bottom>
-		<VBox>
-			<Button text="New Window" fx:id="newWinButton" onAction="#newWindow"/>
+		<VBox prefHeight="150.0">
 			<TabPane tabClosingPolicy="UNAVAILABLE">
 				<Tab text="Console">
 					<TextArea fx:id="displayTextArea" editable="false" />
