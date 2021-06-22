@@ -13,6 +13,12 @@ import java.awt.Toolkit;
 
 
 public class App {
+    
+    /** 
+     * Just a test function I should delete
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
         String date = simpleDateFormat.format(new Date());

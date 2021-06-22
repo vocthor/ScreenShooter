@@ -1,5 +1,9 @@
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -12,10 +16,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+
+/**
+ * Controller class for the UI.fxml file
+ * @author vocthor
+ */
 public class UIControleur implements Initializable {
+
+    /**
+     * All the javafx objects.
+     * cf UI.fxml
+     */
     @FXML private Button startCaptureButton;
     @FXML private Button saveChangesButton;
     @FXML private Button pauseCaptureButton;
@@ -27,20 +42,31 @@ public class UIControleur implements Initializable {
     @FXML private Spinner<Integer> capturePeriodSpinner;
     @FXML private TextArea displayTextArea;
 
+    /**
+     * Object taking and saving the current capture session. 
+     * cf ScreenShooter.java
+     */
     private ScreenShooter sc;
 
     private Timer time;
 
 
+    /**
+     * By default values when launching the program
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         startCaptureButton.setDisable(true);
         pauseCaptureButton.setDisable(true);
         stopCaptureButton.setDisable(true);
         sc = new ScreenShooter(null, null);
-        displayTextArea.appendText("You should read the README.md file for how to use this program and more ! \n");
+        displayTextArea.appendText("You should read the README.md file or click on \"Help\" for how to use this program and more ! \n");
     }
 
+    /**
+     * Starts taking captures until "Pause Capture" or "Stop Capture" are pressed.
+     * @param event
+     */
     @FXML
     void startCapture (ActionEvent event){
         pauseCaptureButton.setDisable(false);
@@ -59,6 +85,10 @@ public class UIControleur implements Initializable {
         },0,sc.getPeriod());
     }
 
+    /**
+     * Configure the ScreenShooter object to store the captures into the given directory's path.
+     * @param event
+     */
     @FXML 
     void chosenPath (ActionEvent event){
         File pathFile = new File(pathTextField.getText());
@@ -73,6 +103,10 @@ public class UIControleur implements Initializable {
         }
     }
 
+    /**
+     * Same as chosenPath(ActionEvent) but in a other way
+     * @param event
+     */
     @FXML
     void selectDirectory (ActionEvent event){
         displayTextArea.appendText("Select where to store the captures \n");
@@ -82,6 +116,10 @@ public class UIControleur implements Initializable {
         pathTextField.appendText(sd.getAbsolutePath()+"\\");
     }
 
+    /**
+     * Configure the ScreenShooter object to save the captures with a name based on the given name.
+     * @param event
+     */
     @FXML 
     void chosenName (ActionEvent event){
         sc.setName(nameTextField.getText());
@@ -89,6 +127,10 @@ public class UIControleur implements Initializable {
         System.out.println("Name set to \""+sc.getName() +"\"");
     }
 
+    /**
+     * Configure the ScreenShooter object to take captures on a given regular time basis
+     * @param event
+     */
     @FXML
     void capturePeriod (ActionEvent event){
         sc.setPeriod(capturePeriodSpinner.getValue());
@@ -96,6 +138,10 @@ public class UIControleur implements Initializable {
         System.out.println("Capture period set to " + sc.getPeriod() + " millisecond(s)");
     }
 
+    /**
+     * Save the changes made to the name, path, or period.
+     * @param event
+     */
     @FXML
     void saveChanges (ActionEvent event){
         chosenPath(event);
@@ -103,6 +149,12 @@ public class UIControleur implements Initializable {
         capturePeriod(event);
     } 
 
+    /**
+     * Can only be activated when a capture session is going on.
+     * Pauses the current capture session.
+     * Parameters are still locked.
+     * @param event
+     */
     @FXML
     void pauseCapture (ActionEvent event){
         displayTextArea.appendText("[PAUSE] \n");
@@ -112,6 +164,12 @@ public class UIControleur implements Initializable {
         startCaptureButton.setDisable(false);
     }
 
+    /**
+     * Can only be activated when a capture session is going on.
+     * Stops the current capture session.
+     * Parameters are reset and unlocked.
+     * @param event
+     */
     @FXML
     void stopCapture (ActionEvent event){
         displayTextArea.appendText("[STOP] The parameters are now reset \n");
@@ -126,18 +184,48 @@ public class UIControleur implements Initializable {
         saveChanges(event);
     }
 
+    /**
+     * Opens an other identical window, allowing you to make 2 simultaneous capture session.
+     * @param event
+     */
     @FXML
     void newWindow (ActionEvent event){
         displayTextArea.appendText("New Window feature is not implemented yet \n");
         System.out.println("New Window feature is not implemented yet");
     }
 
+    /**
+     * Allows to you take captures of only the selected part of your screen.
+     * @param event
+     */
     @FXML
     void selectCaptureZone (ActionEvent event){
-        displayTextArea.appendText("Option feature is not implemented yet \n");
-        System.out.println("Option feature is not implemented yet");
+        displayTextArea.appendText("Selected area feature is not implemented yet \n");
+        System.out.println("Selected area feature is not implemented yet");
     }
 
+    /**
+     * Display README.md text in the "Console" text area
+     * @param event
+     */
+    @FXML
+    void helpDisplay (MouseEvent event){
+        displayTextArea.appendText("\n[HELP]\n");
+        try(BufferedReader br = new BufferedReader(new FileReader("README.md"))){
+            while(br.ready()){
+                displayTextArea.appendText(br.readLine()+"\n");
+            }
+        }catch(FileNotFoundException e){
+            displayTextArea.appendText(e.getMessage());
+        }catch(IOException e){
+            displayTextArea.appendText(e.getMessage());
+        }
+    }
+
+    /**
+     * 
+     * @param b boolean for locking (true) / unlocking (false) the parameters
+     */
     private void lockParameters (boolean b){
         nameTextField.setDisable(b);
         pathTextField.setDisable(b);

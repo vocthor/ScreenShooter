@@ -1,3 +1,9 @@
+## Introduction
+
+This program was made by [@vocthor](https://github.com/vocthor/).
+Its purpose is to take screen captures periodically.
+
+
 ## Disclaimer
 
 This program is still in development, and i'm not a genius. I am not responsible for a bad use. If you discover a new bug, problem, ... or have an idea for a new feature, please report it.
@@ -24,9 +30,10 @@ A lot of features are not implemented yet, and are still in development, but for
  - Pause / Stop the capture session
 
 
-## Not implemented features yet
+## Features not implemented yet
 
 * `File` and `Monitor` menus
 * `Capture` tab
 * Better console
 
+(and don't mind the App.java file)

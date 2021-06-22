@@ -7,6 +7,7 @@
 
 ## TO DO
 
+* JavaDoc
 * Small start, stop, pause, ... images
 * Taking captures of a specific screen zone
 * Tab at the bottom with 2 tabs :

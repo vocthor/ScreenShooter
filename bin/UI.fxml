@@ -21,6 +21,11 @@
 					<RadioMenuItem text="All Monitors" toggleGroup="$monitorGroup" />
 					<RadioMenuItem text="Selected Area" toggleGroup="$monitorGroup" onAction="#selectCaptureZone" />
 				</Menu>
+				<Menu>
+					<graphic>
+                		<Label text="Help" onMouseClicked="#helpDisplay"/>
+            		</graphic>
+				</Menu>
 			</MenuBar>
 			<ToolBar>
 				<VBox spacing="5">
@@ -57,7 +62,7 @@
 		</HBox>
 	</center>
 	<bottom>
-		<VBox prefHeight="150.0">
+		<VBox>
 			<TabPane tabClosingPolicy="UNAVAILABLE">
 				<Tab text="Console">
 					<TextArea fx:id="displayTextArea" editable="false" />
