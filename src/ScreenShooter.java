@@ -1,10 +1,12 @@
 import java.io.File;
 import java.io.IOException;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -114,10 +116,28 @@ public class ScreenShooter {
     }
 
     /**
-     * Use the Rectangle and Robot objects create in the constructor to take a screen capture of the primary monitor, 
-     * and it store it into the given path
+     * Use the Rectangle and Robot objects created in the constructor to take a screen capture of the primary monitor, 
+     * and it stores it into the given path
      */
     public void capturePrimaryScreen() {
+        BufferedImage img = robot.createScreenCapture(rect);
+        try {
+            ImageIO.write(img, "JPG", new File(path+ date +"_"+ name +"_"+ number + ".jpg"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        number++;
+    }
+
+    /**
+     * Use the Rectangle and Robot objects created in the constructor to take a screen capture of all the monitors, 
+     * and stores it into the given path
+     */
+    public void captureAllScreens() {
+        for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+            rect = rect.union(gd.getDefaultConfiguration().getBounds());
+        }
         BufferedImage img = robot.createScreenCapture(rect);
         try {
             ImageIO.write(img, "JPG", new File(path+ date +"_"+ name +"_"+ number + ".jpg"));

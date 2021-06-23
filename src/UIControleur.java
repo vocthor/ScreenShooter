@@ -13,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -41,6 +43,10 @@ public class UIControleur implements Initializable {
     @FXML private TextField nameTextField;
     @FXML private Spinner<Integer> capturePeriodSpinner;
     @FXML private TextArea displayTextArea;
+    @FXML private Menu monitorMenu;
+    @FXML private RadioMenuItem primaryMonitorRMI;
+    @FXML private RadioMenuItem allMonitorsRMI;
+    @FXML private RadioMenuItem selectedAreaRMI;
 
     /**
      * Object taking and saving the current capture session. 
@@ -49,7 +55,7 @@ public class UIControleur implements Initializable {
     private ScreenShooter sc;
 
     private Timer time;
-
+    
 
     /**
      * By default values when launching the program
@@ -60,7 +66,7 @@ public class UIControleur implements Initializable {
         pauseCaptureButton.setDisable(true);
         stopCaptureButton.setDisable(true);
         sc = new ScreenShooter(null, null);
-        displayTextArea.appendText("You should read the README.md file or click on \"Help\" for how to use this program and more ! \n");
+        displayTextArea.appendText("You should read the README.md file or click on the Help menu for how to use this program and more ! \n \n");
     }
 
     /**
@@ -76,13 +82,25 @@ public class UIControleur implements Initializable {
         displayTextArea.appendText("[START] \n");
         System.out.println("[START]");
         time = new Timer();
-        time.schedule (new TimerTask(){
-            public void run () {
-                //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
-                sc.capturePrimaryScreen();
-                System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
-            }
-        },0,sc.getPeriod());
+        if (primaryMonitorRMI.isSelected()){
+            time.schedule (new TimerTask(){
+                public void run () {
+                    //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
+                    sc.capturePrimaryScreen();
+                    System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
+                }
+            },0,sc.getPeriod());
+        } else if (allMonitorsRMI.isSelected()){
+            time.schedule (new TimerTask(){
+                public void run () {
+                    //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
+                    sc.captureAllScreens();
+                    System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
+                }
+            },0,sc.getPeriod());
+        }else if (selectedAreaRMI.isSelected()){
+
+        }
     }
 
     /**
@@ -94,7 +112,7 @@ public class UIControleur implements Initializable {
         File pathFile = new File(pathTextField.getText());
         if(pathFile.isDirectory() && pathFile.canWrite()){
             sc.setPath(pathTextField.getText());
-            displayTextArea.appendText("Path set to \""+sc.getPath()+"\" \n");
+            displayTextArea.appendText("    Path set to \""+sc.getPath()+"\" \n");
             System.out.println("Path set to \""+sc.getPath()+"\"");
             startCaptureButton.setDisable(false);
         }else {
@@ -123,7 +141,7 @@ public class UIControleur implements Initializable {
     @FXML 
     void chosenName (ActionEvent event){
         sc.setName(nameTextField.getText());
-        displayTextArea.appendText("Name set to \""+sc.getName() +"\" \n");
+        displayTextArea.appendText("    Name set to \""+sc.getName() +"\" \n");
         System.out.println("Name set to \""+sc.getName() +"\"");
     }
 
@@ -134,7 +152,7 @@ public class UIControleur implements Initializable {
     @FXML
     void capturePeriod (ActionEvent event){
         sc.setPeriod(capturePeriodSpinner.getValue());
-        displayTextArea.appendText("Capture period set to " + sc.getPeriod() + " millisecond(s) \n");
+        displayTextArea.appendText("    Capture period set to " + sc.getPeriod() + " millisecond(s) \n");
         System.out.println("Capture period set to " + sc.getPeriod() + " millisecond(s)");
     }
 
@@ -195,13 +213,33 @@ public class UIControleur implements Initializable {
     }
 
     /**
-     * Allows to you take captures of only the selected part of your screen.
+     * Allows you to take captures of your primary monitor
+     * @param event
+     */
+    @FXML
+    void primaryMonitorCapture (ActionEvent event){
+        displayTextArea.appendText("[MONITOR] Primary monitor \n");
+        System.out.println("[MONITOR] Primary monitor");
+    }
+
+    /**
+     * Allows you to take captures of all your monitors
+     * @param event
+     */
+    @FXML
+    void allMonitorsCapture (ActionEvent event){
+        displayTextArea.appendText("[MONITOR] All monitors \n");
+        System.out.println("[MONITOR] All monitors");
+    }
+
+    /**
+     * Allows you to take captures of only the selected part of your screen.
      * @param event
      */
     @FXML
     void selectCaptureZone (ActionEvent event){
-        displayTextArea.appendText("Selected area feature is not implemented yet \n");
-        System.out.println("Selected area feature is not implemented yet");
+        displayTextArea.appendText("[MONITOR] Selected area \n");
+        System.out.println("[MONITOR] Selected area");
     }
 
     /**
@@ -210,7 +248,7 @@ public class UIControleur implements Initializable {
      */
     @FXML
     void helpDisplay (MouseEvent event){
-        displayTextArea.appendText("\n[HELP]\n");
+        displayTextArea.appendText("[HELP]\n");
         try(BufferedReader br = new BufferedReader(new FileReader("README.md"))){
             while(br.ready()){
                 displayTextArea.appendText(br.readLine()+"\n");
@@ -223,6 +261,17 @@ public class UIControleur implements Initializable {
     }
 
     /**
+     * Just clear the console
+     * Keeps only the first the 1° message "You should read ..."
+     * @param event
+     */
+    @FXML
+    void clearConsole (ActionEvent event){
+        displayTextArea.clear();
+        displayTextArea.appendText("You should read the README.md file or click on the Help menu for how to use this program and more ! \n");
+    }
+
+    /**
      * 
      * @param b boolean for locking (true) / unlocking (false) the parameters
      */
@@ -232,5 +281,6 @@ public class UIControleur implements Initializable {
         saveChangesButton.setDisable(b);
         capturePeriodSpinner.setDisable(b);
         browseButton.setDisable(b);
+        monitorMenu.setDisable(b);
     }
 }
