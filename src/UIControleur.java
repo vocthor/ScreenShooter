@@ -8,6 +8,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -83,19 +87,25 @@ public class UIControleur implements Initializable {
         System.out.println("[START]");
         time = new Timer();
         if (primaryMonitorRMI.isSelected()){
+            sc.setRect(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
             time.schedule (new TimerTask(){
                 public void run () {
                     //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
-                    sc.capturePrimaryScreen();
                     System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
+                    sc.capture();
                 }
             },0,sc.getPeriod());
         } else if (allMonitorsRMI.isSelected()){
+            Rectangle rectangle = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+            for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+                rectangle = rectangle.union(gd.getDefaultConfiguration().getBounds());
+            }
+            sc.setRect(rectangle);
             time.schedule (new TimerTask(){
                 public void run () {
                     //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
-                    sc.captureAllScreens();
                     System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
+                    sc.capture();
                 }
             },0,sc.getPeriod());
         }else if (selectedAreaRMI.isSelected()){

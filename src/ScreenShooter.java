@@ -4,9 +4,6 @@ import java.awt.image.BufferedImage;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
-import java.awt.Toolkit;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,7 +42,6 @@ public class ScreenShooter {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        rect =new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
         date = simpleDateFormat.format(new Date());
     }
@@ -92,6 +88,13 @@ public class ScreenShooter {
     }
 
     /**
+     * Getter of the rectangle used for the screen capture
+     * @return (Rectangle) rect
+     */
+    public Rectangle getRect(){
+        return rect;
+    }
+    /**
      * Setter of the path
      * @param p (String) path
      */
@@ -116,28 +119,18 @@ public class ScreenShooter {
     }
 
     /**
-     * Use the Rectangle and Robot objects created in the constructor to take a screen capture of the primary monitor, 
-     * and it stores it into the given path
+     * Setter of the rect
+     * @param rectangle (Rectangle) rect
      */
-    public void capturePrimaryScreen() {
-        BufferedImage img = robot.createScreenCapture(rect);
-        try {
-            ImageIO.write(img, "JPG", new File(path+ date +"_"+ name +"_"+ number + ".jpg"));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        number++;
+    public void setRect (Rectangle rectangle){
+        rect = rectangle;
     }
 
     /**
-     * Use the Rectangle and Robot objects created in the constructor to take a screen capture of all the monitors, 
-     * and stores it into the given path
+     * Use the Rectangle and Robot objects created in the constructor to take a screen capture of the primary monitor, 
+     * and it stores it into the given path
      */
-    public void captureAllScreens() {
-        for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
-            rect = rect.union(gd.getDefaultConfiguration().getBounds());
-        }
+    public void capture() {
         BufferedImage img = robot.createScreenCapture(rect);
         try {
             ImageIO.write(img, "JPG", new File(path+ date +"_"+ name +"_"+ number + ".jpg"));
