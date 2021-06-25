@@ -4,6 +4,9 @@ import java.awt.image.BufferedImage;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -42,6 +45,7 @@ public class ScreenShooter {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        rect =new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         simpleDateFormat = new SimpleDateFormat("yy-MM-dd");
         date = simpleDateFormat.format(new Date());
     }
@@ -120,10 +124,22 @@ public class ScreenShooter {
 
     /**
      * Setter of the rect
-     * @param rectangle (Rectangle) rect
+     * @param s (String) s
      */
-    public void setRect (Rectangle rectangle){
-        rect = rectangle;
+    public void setRect (String s){
+        switch (s){
+            case "Primary":         //captures only the primary monitor
+                rect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+                break;
+            case "All":            //captures all the monitors
+                for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+                    rect = rect.union(gd.getDefaultConfiguration().getBounds());
+                }
+                break;
+            case "Selected Area":   //captures only the selected area
+                
+                break;
+        }
     }
 
     /**
