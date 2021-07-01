@@ -1,3 +1,4 @@
+package Controller;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +10,7 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Model.ScreenShooter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,8 +60,18 @@ public class MainController implements Initializable {
      */
     private ScreenShooter sc;
 
+    /**
+     * Timer for the loop (cf MainController.startCapture())
+     */
     private Timer time;
-    
+
+    /**
+     * Values for the selected area
+     */
+    private double selectAreaOriginX;
+    private double selectAreaOriginY;
+    private double selectAreaWidth;
+    private double selectAreaHeight;
 
     /**
      * By default values when launching the program
@@ -90,13 +102,6 @@ public class MainController implements Initializable {
         displayTextArea.appendText("[START] \n");
         System.out.println("[START]");
         time = new Timer();
-        if (primaryMonitorRMI.isSelected()){
-            sc.setRect("Primary");
-        } else if (allMonitorsRMI.isSelected()){
-            sc.setRect("All");
-        }else if (selectedAreaRMI.isSelected()){
-            sc.setRect("Selected Area");
-        }
         time.schedule (new TimerTask(){
             public void run () {
                 //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
@@ -168,6 +173,17 @@ public class MainController implements Initializable {
         chosenPath(event);
         chosenName(event);
         capturePeriod(event);
+        if (primaryMonitorRMI.isSelected()){
+            sc.setRectPrimary();
+            displayTextArea.appendText("    Primary monitor \n");
+        } else if (allMonitorsRMI.isSelected()){
+            sc.setRectAll();
+            displayTextArea.appendText("    All monitors \n");
+        }else if (selectedAreaRMI.isSelected()){
+            sc.setRectSelectedArea(selectAreaOriginX, selectAreaOriginY, selectAreaWidth, selectAreaHeight);
+            displayTextArea.appendText("    x = " + selectAreaOriginX +"\n    y = " + selectAreaOriginY + 
+                                        "\n    Width = " + selectAreaWidth + "\n    Height = " + selectAreaHeight + "\n \n");
+        }
     } 
 
     /**
@@ -244,13 +260,14 @@ public class MainController implements Initializable {
         displayTextArea.appendText("[MONITOR] Selected area \n");
         System.out.println("[MONITOR] Selected area");
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TransparentWindow.fxml"));
-            Parent root1;
-            root1 = (Parent) fxmlLoader.load();
+            FXMLLoader transpLoader = new FXMLLoader(getClass().getResource("../View/TransparentWindow.fxml"));
+            Parent root1 = (Parent) transpLoader.load();
+            TransparentController transpController = transpLoader.getController();
+            transpController.setParentController(this);
             Stage stage = new Stage();
-            //stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Select Area");
-            stage.setScene(new Scene(root1));  
+            stage.setScene(new Scene(root1));
+            stage.initModality(Modality.NONE);
+            stage.setTitle("Select Area");  
             stage.setResizable(true);       
             stage.setMaximized(true);
             stage.setOpacity(0.5);
@@ -294,7 +311,7 @@ public class MainController implements Initializable {
     }
 
     /**
-     * 
+     * Lock the different parameters and menus
      * @param b boolean for locking (true) / unlocking (false) the parameters
      */
     private void lockParameters (boolean b){
@@ -304,5 +321,69 @@ public class MainController implements Initializable {
         capturePeriodSpinner.setDisable(b);
         browseButton.setDisable(b);
         monitorMenu.setDisable(b);
+    }
+
+    /**
+     * 
+     * @param x
+     */
+    public void setSelectAreaOriginX( double x){
+        selectAreaOriginX = x;
+    }
+
+    /**
+     * 
+     * @param y
+     */
+    public void setSelectAreaOriginY( double y){
+        selectAreaOriginY = y;
+    }
+
+    /**
+     * 
+     * @param w
+     */
+    public void setSelectAreaWidth( double w){
+        selectAreaWidth = w;
+    }
+
+    /**
+     * 
+     * @param h
+     */
+    public void setSelectAreaHeight( double h){
+        selectAreaHeight = h;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public double getSelectAreaOriginX (){
+        return selectAreaOriginX;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public double getSelectAreaOriginY (){
+        return selectAreaOriginY;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public double getSelectAreaWidth (){
+        return selectAreaWidth;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public double getSelectAreaHeight (){
+        return selectAreaHeight;
     }
 }

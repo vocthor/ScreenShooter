@@ -1,3 +1,4 @@
+package Model;
 import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
@@ -123,23 +124,30 @@ public class ScreenShooter {
     }
 
     /**
-     * Setter of the rect
-     * @param s (String) s
+     * Sets up the rectangle for capturing only the primary monitor
      */
-    public void setRect (String s){
-        switch (s){
-            case "Primary":         //captures only the primary monitor
-                rect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-                break;
-            case "All":            //captures all the monitors
-                for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
-                    rect = rect.union(gd.getDefaultConfiguration().getBounds());
-                }
-                break;
-            case "Selected Area":   //captures only the selected area
-                
-                break;
+    public void setRectPrimary (){
+        rect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());  
+    }
+
+    /**
+     * Sets up the rectangle for capturing all the monitors
+     */
+    public void setRectAll(){
+        for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+            rect = rect.union(gd.getDefaultConfiguration().getBounds());
         }
+    }
+
+    /**
+     * Sets up the rectangle for capturing only the selected area
+     * @param x x coordinate of the top left corner
+     * @param y y coordinate of the top left corner
+     * @param width width of the rectangle
+     * @param height height of the rectangle
+     */
+    public void setRectSelectedArea(double x, double y, double width, double height){
+        rect = new Rectangle((int) x, (int) y, (int) width, (int) height);
     }
 
     /**

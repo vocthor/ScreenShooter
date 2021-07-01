@@ -26,9 +26,8 @@ public class Visualiseur extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("MainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View/MainWindow.fxml"));
         Scene scene = new Scene(root);
-
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("ScreenShooter");
         primaryStage.setResizable(true);

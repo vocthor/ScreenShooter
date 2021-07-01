@@ -1,3 +1,4 @@
+package Model;
 
 
 import java.io.File;
@@ -30,10 +31,10 @@ public class App {
         String name = "elec";
         int number = 0;
         //System.out.println("Hello, World!" +date );
-        /*
+        
         Robot robot = new Robot();
         Rectangle rect =new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-        for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
+        /*for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
             rect = rect.union(gd.getDefaultConfiguration().getBounds());
         }
         rect = new Rectangle(0, 0, 1535, 863);*/
