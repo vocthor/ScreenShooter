@@ -20,18 +20,22 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 
 /**
- * Controller class for the UI.fxml file
+ * Controller class for the MainWindow.fxml file
  * @author vocthor
  */
-public class UIControleur implements Initializable {
+public class MainController implements Initializable {
 
     /**
      * All the javafx objects.
-     * cf UI.fxml
+     * cf MainWindow.fxml
      */
     @FXML private Button startCaptureButton;
     @FXML private Button saveChangesButton;
@@ -62,11 +66,15 @@ public class UIControleur implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        startCaptureButton.setDisable(true);
-        pauseCaptureButton.setDisable(true);
-        stopCaptureButton.setDisable(true);
-        sc = new ScreenShooter(null, null);
-        displayTextArea.appendText("You should read the README.md file or click on the Help menu for how to use this program and more ! \n \n");
+        try{
+            startCaptureButton.setDisable(true);
+            pauseCaptureButton.setDisable(true);
+            stopCaptureButton.setDisable(true);
+            sc = new ScreenShooter(null, null);
+            displayTextArea.appendText("You should read the README.md file or click on the Help menu for how to use this program and more ! \n \n");
+        }catch (Exception e){
+            System.out.println("Transparent window init pb");
+        }
     }
 
     /**
@@ -235,6 +243,25 @@ public class UIControleur implements Initializable {
     void selectCaptureZone (ActionEvent event){
         displayTextArea.appendText("[MONITOR] Selected area \n");
         System.out.println("[MONITOR] Selected area");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("TransparentWindow.fxml"));
+            Parent root1;
+            root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            //stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Select Area");
+            stage.setScene(new Scene(root1));  
+            stage.setResizable(true);       
+            stage.setMaximized(true);
+            stage.setOpacity(0.5);
+            stage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            System.out.println("Zbeub dans la matrice");
+        }
+            
+        
     }
 
     /**

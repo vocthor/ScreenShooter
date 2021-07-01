@@ -30,16 +30,16 @@ public class App {
         String name = "elec";
         int number = 0;
         //System.out.println("Hello, World!" +date );
-        
+        /*
         Robot robot = new Robot();
         Rectangle rect =new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
         for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
             rect = rect.union(gd.getDefaultConfiguration().getBounds());
         }
-        rect = new Rectangle(0, 0, 1535, 863);
-        /*
+        rect = new Rectangle(0, 0, 1535, 863);*/
+        
         System.out.println(MouseInfo.getPointerInfo().getLocation().getX());
-        System.out.println(MouseInfo.getPointerInfo().getLocation().getY());*/
+        System.out.println(MouseInfo.getPointerInfo().getLocation().getY());        //MARCHE MEME QD PLRS ECRANS
         /*
         BufferedImage img = robot.createScreenCapture(rect);
         ImageIO.write(img, "JPG", new File("Output/"+date +"_"+ name +"_"+ number + ".jpg"));
