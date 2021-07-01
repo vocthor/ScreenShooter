@@ -34,10 +34,11 @@ A lot of features are not implemented yet, and are still in development, but for
 1. Start the program, the main window will appear.
 2. Enter a valid absolute path, a generic name (not mandatory), and set up the time period.
 3. Select the area to capture
-   If you choose `Selected Area` a new window with low opacity will appear.
-   Just superpose this window on the area you want to select (you can resize and move it).
-   Then draw a rectangle on this window by pressing your mouse on the top-left corner and releasing it on the down-right corner.
-   This rectangle must match the area you want to capture.
+>If you choose `Selected Area` a new window with low opacity will appear.
+>Just superpose this window on the area you want to select (you can resize and move it).
+>Then draw a rectangle on the new window by pressing your mouse on the top-left corner and releasing it on the down-right corner.
+>This rectangle must match the area you want to capture.
+>You can now close this window
 4. **Save changes**
 5. Start the capture session
 6. Pause / Stop the capture session

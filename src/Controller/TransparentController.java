@@ -1,34 +1,34 @@
 package Controller;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import java.awt.MouseInfo;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
-public class TransparentController implements Initializable{
-
-    MainController mainController;
-
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO Auto-generated method stub
-        
-    }
+/**
+ * Controller class for the TransparentWindow.fxml file
+ * This window can only be created passing by the {@code Selected Area} menu
+ * @author vocthor
+ */
+public class TransparentController{
 
     /**
-     * 
-     * @param mainController
+     * Main window from which this window was created
+     */
+    MainController mainController;
+
+    /**
+     * Setter of the parent controller (parent window)
+     * @param mainController (MainController) parent controller
      */
     public void setParentController(MainController mainController){
         this.mainController = mainController;
     }
 
     /**
-     * 
+     * Sets the selectAreaOriginX and selectAreaOriginY values of the mainController
      * @param event
+     * @see {@link Controller.MainController}
      */
     @FXML 
     void mousePressed (MouseEvent event){
@@ -39,8 +39,9 @@ public class TransparentController implements Initializable{
     }
 
     /**
-     * 
+     * Sets the selectAreaWidth and selectAreaHeight values of the mainController
      * @param event
+     * @see {@link Controller.MainController}
      */
     @FXML
     void mouseReleased (MouseEvent event){

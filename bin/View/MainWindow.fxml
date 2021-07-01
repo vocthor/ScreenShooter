@@ -17,8 +17,8 @@
 			<fx:define>
 				<ToggleGroup fx:id="monitorGroup" />
 			</fx:define>
-			<RadioMenuItem fx:id="primaryMonitorRMI" text="Primary Monitor" toggleGroup="$monitorGroup" selected="true" onAction="#primaryMonitorCapture"/>
-			<RadioMenuItem fx:id="allMonitorsRMI" text="All Monitors" toggleGroup="$monitorGroup" onAction="#allMonitorsCapture"/>
+			<RadioMenuItem fx:id="primaryMonitorRMI" text="Primary Monitor" toggleGroup="$monitorGroup" selected="true" />
+			<RadioMenuItem fx:id="allMonitorsRMI" text="All Monitors" toggleGroup="$monitorGroup" />
 			<RadioMenuItem fx:id="selectedAreaRMI" text="Selected Area" toggleGroup="$monitorGroup" onAction="#selectCaptureZone" />
 		</Menu>
 		<Menu>

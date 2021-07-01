@@ -21,7 +21,7 @@ public class ScreenShooter {
     private String path;        //where to store the captures
     private String name;        //generic name of the current capture session
     private int number;         //id for distinguishing the captures of a same capture session
-    private int period;
+    private int period;         //time in millisecond between each capture
     
     /**
      * Bunch of object used to create the capture and store it
@@ -99,6 +99,7 @@ public class ScreenShooter {
     public Rectangle getRect(){
         return rect;
     }
+    
     /**
      * Setter of the path
      * @param p (String) path
@@ -151,7 +152,7 @@ public class ScreenShooter {
     }
 
     /**
-     * Use the Rectangle and Robot objects created in the constructor to take a screen capture of the primary monitor, 
+     * Use the Rectangle and Robot objects created in the constructor to take a screen capture, 
      * and it stores it into the given path
      */
     public void capture() {

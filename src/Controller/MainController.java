@@ -68,25 +68,21 @@ public class MainController implements Initializable {
     /**
      * Values for the selected area
      */
-    private double selectAreaOriginX;
-    private double selectAreaOriginY;
-    private double selectAreaWidth;
-    private double selectAreaHeight;
+    private double selectAreaOriginX;   //x coordinate top-left corner
+    private double selectAreaOriginY;   //y coordinate top-left corner
+    private double selectAreaWidth;     //width
+    private double selectAreaHeight;    //height
 
     /**
      * By default values when launching the program
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try{
-            startCaptureButton.setDisable(true);
-            pauseCaptureButton.setDisable(true);
-            stopCaptureButton.setDisable(true);
-            sc = new ScreenShooter(null, null);
-            displayTextArea.appendText("You should read the README.md file or click on the Help menu for how to use this program and more ! \n \n");
-        }catch (Exception e){
-            System.out.println("Transparent window init pb");
-        }
+        startCaptureButton.setDisable(true);
+        pauseCaptureButton.setDisable(true);
+        stopCaptureButton.setDisable(true);
+        sc = new ScreenShooter(null, null);
+        displayTextArea.appendText("You should read the README.md file or click on the Help menu for how to use this program and more ! \n \n");
     }
 
     /**
@@ -232,33 +228,12 @@ public class MainController implements Initializable {
     }
 
     /**
-     * Allows you to take captures of your primary monitor
-     * @param event
-     */
-    @FXML
-    void primaryMonitorCapture (ActionEvent event){
-        displayTextArea.appendText("[MONITOR] Primary monitor \n");
-        System.out.println("[MONITOR] Primary monitor");
-    }
-
-    /**
-     * Allows you to take captures of all your monitors
-     * @param event
-     */
-    @FXML
-    void allMonitorsCapture (ActionEvent event){
-        displayTextArea.appendText("[MONITOR] All monitors \n");
-        System.out.println("[MONITOR] All monitors");
-    }
-
-    /**
-     * Allows you to take captures of only the selected part of your screen.
+     * Allows you to take captures of only the selected part of your screen. 
+     * A new window with low opacity will be opened for this.
      * @param event
      */
     @FXML
     void selectCaptureZone (ActionEvent event){
-        displayTextArea.appendText("[MONITOR] Selected area \n");
-        System.out.println("[MONITOR] Selected area");
         try {
             FXMLLoader transpLoader = new FXMLLoader(getClass().getResource("../View/TransparentWindow.fxml"));
             Parent root1 = (Parent) transpLoader.load();
@@ -275,7 +250,7 @@ public class MainController implements Initializable {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            System.out.println("Zbeub dans la matrice");
+            displayTextArea.appendText("An IOException has occured !");
         }
             
         
@@ -324,64 +299,64 @@ public class MainController implements Initializable {
     }
 
     /**
-     * 
-     * @param x
+     * Setter of the selectAreaOriginX var (for the selected area Rectangle)
+     * @param x (double)
      */
     public void setSelectAreaOriginX( double x){
         selectAreaOriginX = x;
     }
 
     /**
-     * 
-     * @param y
+     * Setter of the selectAreaOriginY var (for the selected area Rectangle)
+     * @param y (double)
      */
     public void setSelectAreaOriginY( double y){
         selectAreaOriginY = y;
     }
 
     /**
-     * 
-     * @param w
+     * Setter of the selectAreaWidth var (for the selected area Rectangle)
+     * @param w (double)
      */
     public void setSelectAreaWidth( double w){
         selectAreaWidth = w;
     }
 
     /**
-     * 
-     * @param h
+     * Setter of the selectAreaHeight var (for the selected area Rectangle)
+     * @param h (double)
      */
     public void setSelectAreaHeight( double h){
         selectAreaHeight = h;
     }
 
     /**
-     * 
-     * @return
+     * Getter of the selectAreaOriginX var (for the selected area Rectangle)
+     * @return (double)
      */
     public double getSelectAreaOriginX (){
         return selectAreaOriginX;
     }
 
     /**
-     * 
-     * @return
+     * Getter of the selectAreaOriginY var (for the selected area Rectangle)
+     * @return (double)
      */
     public double getSelectAreaOriginY (){
         return selectAreaOriginY;
     }
 
     /**
-     * 
-     * @return
+     * Getter of the selectAreaWidth var (for the selected area Rectangle)
+     * @return (double)
      */
     public double getSelectAreaWidth (){
         return selectAreaWidth;
     }
 
     /**
-     * 
-     * @return
+     * Getter of the selectAreaHeight var (for the selected area Rectangle)
+     * @return (double)
      */
     public double getSelectAreaHeight (){
         return selectAreaHeight;
