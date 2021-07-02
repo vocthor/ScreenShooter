@@ -9,7 +9,7 @@ Its purpose is to take screen captures periodically.
 ## Disclaimer
 
 This program is made 100% in Java. 
-This program is still in development, and i'm not a genius. I am not responsible for a bad use. If you discover a new bug, problem, ... or have an idea for a new feature, please report it.
+This program is still in development, and i'm not a genius. I am not responsible for a bad use (even if there should'nt be one). If you discover a new bug, problem, ... or have an idea for a new feature, please report it.
 A lot of features are not implemented yet, and are still in development, but for now this program is functional for a basic use.
 
 

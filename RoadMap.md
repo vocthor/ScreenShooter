@@ -1,7 +1,9 @@
 ## DONE
 
-* Path implementation 	=> ABSOLUTE PATH MUST BE LIKE 	"F:\INFO\JAVA\ScreenShotProject\Output\"
-														"G:\INFO\JAVA\ScreenShotProject\Output\"
+* Path implementation 	=> ABSOLUTE PATH MUST BE LIKE 	
+    "F:\INFO\JAVA\ScreenShotProject\Output\"
+    "G:\INFO\JAVA\ScreenShotProject\Output\"
+* Taking captures of a specific screen zone
 
 
 
@@ -9,7 +11,7 @@
 
 * JavaDoc
 * Small start, stop, pause, ... images
-* Taking captures of a specific screen zone
+
 * Tab at the bottom with 2 tabs :
     - text zone that shows what happened (the sysout) 
     - last capture taken

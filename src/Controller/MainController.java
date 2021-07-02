@@ -61,6 +61,11 @@ public class MainController implements Initializable {
     private ScreenShooter sc;
 
     /**
+     * Stage for the Selected Area feature
+     */
+    private Stage transpStage;
+
+    /**
      * Timer for the loop (cf MainController.startCapture())
      */
     private Timer time;
@@ -94,7 +99,8 @@ public class MainController implements Initializable {
         pauseCaptureButton.setDisable(false);
         stopCaptureButton.setDisable(false);
         startCaptureButton.setDisable(true);
-        lockParameters(true);
+        lockParameters(true);                           //Locks parameters
+        if (transpStage!=null) transpStage.close();                            //and automatically close the Select Area window
         displayTextArea.appendText("[START] \n");
         System.out.println("[START]");
         time = new Timer();
@@ -114,7 +120,7 @@ public class MainController implements Initializable {
     @FXML 
     void chosenPath (ActionEvent event){
         File pathFile = new File(pathTextField.getText());
-        if(pathFile.isDirectory() && pathFile.canWrite()){
+        if(pathFile.isDirectory() && pathFile.canWrite()){      //Is it better to use try-catch ?
             sc.setPath(pathTextField.getText());
             displayTextArea.appendText("    Path set to \""+sc.getPath()+"\" \n");
             System.out.println("Path set to \""+sc.getPath()+"\"");
@@ -162,6 +168,7 @@ public class MainController implements Initializable {
 
     /**
      * Save the changes made to the name, path, or period.
+     * Updates the {@link ScreenShooter.rect} var depending on the choice Primary monitor, All monitors, or Selected Area
      * @param event
      */
     @FXML
@@ -204,15 +211,20 @@ public class MainController implements Initializable {
      * @param event
      */
     @FXML
-    void stopCapture (ActionEvent event){
+    public void stopCapture (ActionEvent event){
         displayTextArea.appendText("[STOP] The parameters are now reset \n");
         System.out.println("[STOP]");
-        time.cancel();
+        try{        //in case you close the window without starting the capture even once
+            time.cancel();
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         pauseCaptureButton.setDisable(true);
         stopCaptureButton.setDisable(true);
         lockParameters(false);
         pathTextField.clear();
         nameTextField.clear();
+        primaryMonitorRMI.setSelected(true);
         sc = new ScreenShooter(null, null);
         saveChanges(event);
     }
@@ -235,25 +247,26 @@ public class MainController implements Initializable {
     @FXML
     void selectCaptureZone (ActionEvent event){
         try {
+            try{             //In case of a transparent is already opened
+                transpStage.close();
+            }catch(Exception e){}
             FXMLLoader transpLoader = new FXMLLoader(getClass().getResource("../View/TransparentWindow.fxml"));
             Parent root1 = (Parent) transpLoader.load();
             TransparentController transpController = transpLoader.getController();
             transpController.setParentController(this);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));
-            stage.initModality(Modality.NONE);
-            stage.setTitle("Select Area");  
-            stage.setResizable(true);       
-            stage.setMaximized(true);
-            stage.setOpacity(0.5);
-            stage.show();
+            transpStage = new Stage();
+            transpStage.setScene(new Scene(root1));
+            transpStage.initModality(Modality.NONE);
+            transpStage.setTitle("Select Area");  
+            transpStage.setResizable(true);       
+            transpStage.setMaximized(true);
+            transpStage.setOpacity(0.5);
+            transpStage.show();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             displayTextArea.appendText("An IOException has occured !");
         }
-            
-        
     }
 
     /**
@@ -361,4 +374,17 @@ public class MainController implements Initializable {
     public double getSelectAreaHeight (){
         return selectAreaHeight;
     }
+
+    /**
+     * Getter of the FXML TextArea displayTextArea
+     * @return (TextArea) displayTextArea
+     */
+    public TextArea getDisplayTextArea (){
+        return displayTextArea;
+    }
+
+    public ScreenShooter getScreenShooter (){
+        return sc;
+    }
+
 }
