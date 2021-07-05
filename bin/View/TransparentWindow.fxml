@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+
+<BorderPane prefHeight="Infinity" prefWidth="Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TransparentController" 
+			onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" fx:id="transparentBorderPane">
+	<center>
+		<Label text="Press on top-left corner, release on down-right corner" style="-fx-font-size:42; -fx-font-weight:bold" fx:id="transpLabel"/>
+	</center>
+</BorderPane>

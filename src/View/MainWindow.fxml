@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox prefHeight="400.0" prefWidth="500.0" maxWidth="Infinity" maxHeight="Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="Controller.MainController" >	
+	<MenuBar>
+		<Menu text="File">
+			<MenuItem text="Clear Console" onAction="#clearConsole" />
+			<MenuItem text="New Window" onAction="#newWindow" />
+		</Menu>
+		<Menu text="Monitor" fx:id="monitorMenu">
+			<fx:define>
+				<ToggleGroup fx:id="monitorGroup" />
+			</fx:define>
+			<RadioMenuItem fx:id="primaryMonitorRMI" text="Primary Monitor" toggleGroup="$monitorGroup" selected="true" />
+			<RadioMenuItem fx:id="allMonitorsRMI" text="All Monitors" toggleGroup="$monitorGroup" />
+			<RadioMenuItem fx:id="selectedAreaRMI" text="Selected Area" toggleGroup="$monitorGroup" onAction="#selectCaptureZone" />
+		</Menu>
+		<Menu>
+			<graphic>
+				<Label text="Help" onMouseClicked="#helpDisplay"/>
+			</graphic>
+		</Menu>
+	</MenuBar>
+
+
+	<VBox spacing="5" alignment="CENTER">
+		<padding>
+			<Insets top="10" bottom="3" left="5" right="5"/>
+		</padding>
+		<HBox spacing="5">
+			<Label text="Path :" />
+			<TextField fx:id="pathTextField" onAction="#chosenPath" HBox.hgrow="ALWAYS">
+				<tooltip><Tooltip text="Where to store the captures (Must be like C:\Users\UserName\Folder\...) " /></tooltip>
+			</TextField>
+			<Button text="Browse" fx:id="browseButton" onAction="#selectDirectory" />
+		</HBox>
+		<HBox spacing="5">
+			<Label text="Name :" />
+			<TextField fx:id="nameTextField" onAction="#chosenName" HBox.hgrow="ALWAYS">
+				<tooltip><Tooltip text="Generic name for the next screen shots" /></tooltip>
+			</TextField>
+		</HBox>
+		<HBox spacing="5">
+			<Label text="Period (milliseconds)" />
+			<Spinner fx:id="capturePeriodSpinner" min="1" max="60000" initialValue="3000" amountToStepBy="1" editable="true" >
+				<tooltip><Tooltip text="Time between each capture" /></tooltip>
+			</Spinner>
+			<Pane HBox.hgrow="ALWAYS" />
+			<Button text="Save Changes" fx:id="saveChangesButton" onAction="#saveChanges" />
+		</HBox>
+	</VBox>
+	<Separator orientation="HORIZONTAL"/>
+
+	<Pane VBox.vgrow="ALWAYS" />
+	<HBox spacing="10" alignment="CENTER">
+		<Button text="Start Capture" fx:id="startCaptureButton" onAction="#startCapture"  />
+		<Button text="Pause Capture" fx:id="pauseCaptureButton" onAction="#pauseCapture"  />
+		<Button text="Stop Capture" fx:id="stopCaptureButton" onAction="#stopCapture" />
+	</HBox>
+	<Pane VBox.vgrow="ALWAYS" />
+
+	<TabPane tabClosingPolicy="UNAVAILABLE" prefHeight="150.0" VBox.vgrow="ALWAYS" maxWidth="Infinity">
+		<Tab text="Console">
+			<TextArea fx:id="displayTextArea" editable="false" />
+		</Tab>
+		<Tab text="Capture">
+			<tooltip><Tooltip text="Last capture taken" /></tooltip>
+			<ImageView fx:id="displayCapture" />
+		</Tab>
+	</TabPane>
+</VBox>

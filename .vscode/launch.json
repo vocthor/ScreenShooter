@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "ScreenShotProject"
+        },
+        {
+            "type": "java",
+            "name": "Launch Visualiseur",
+            "request": "launch",
+            "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-11.0.2/lib\" --add-modules javafx.controls,javafx.fxml",
+            "mainClass": "Visualiseur",
+            "projectName": "ScreenShotProject"
+        }
+    ]
+}
