@@ -1,5 +1,6 @@
 # SCREENSHOOTER
 
+
 ## Introduction
 
 This program was made by [@vocthor](https://github.com/vocthor/).
