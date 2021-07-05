@@ -84,12 +84,11 @@ public class ScreenShooter {
     }
 
     /**
-     * Getter of the definitive file's name.
-     * The file's name is based on the given name
-     * @return (String) fileName
+     * Getter of the date in format YY_MM_DD
+     * @return (String) date
      */
-    public String getFileName(){
-        return date +"_"+ name +"_"+ number;
+    public String getDate(){
+        return date;
     }
 
     /**

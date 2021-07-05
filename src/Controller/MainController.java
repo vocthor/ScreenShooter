@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 import Model.ScreenShooter;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,9 +25,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.application.Platform;
 
 
 /**
@@ -99,16 +102,16 @@ public class MainController implements Initializable {
         pauseCaptureButton.setDisable(false);
         stopCaptureButton.setDisable(false);
         startCaptureButton.setDisable(true);
-        lockParameters(true);                           //Locks parameters
+        lockParameters(true);                                                  //Locks parameters
         if (transpStage!=null) transpStage.close();                            //and automatically close the Select Area window
         displayTextArea.appendText("[START] \n");
         System.out.println("[START]");
         time = new Timer();
         time.schedule (new TimerTask(){
             public void run () {
-                //displayTextArea.appendText("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\" \n");
-                System.out.println("[RUNNING] " + sc.getFileName() + ".jpg  stored in \"" + sc.getPath() + "\"" );
                 sc.capture();
+                displayTextArea.appendText("[RUNNING] " + sc.getDate()+"_"+sc.getName()+"_"+(sc.getNum()-1) + ".jpg  stored in \"" + sc.getPath() + "\" \n");
+                System.out.println("[RUNNING] " + sc.getDate()+"_"+sc.getName()+"_"+(sc.getNum()-1) + ".jpg  stored in \"" + sc.getPath() + "\"" );
             }
         },0,sc.getPeriod());
     }
@@ -237,6 +240,26 @@ public class MainController implements Initializable {
     void newWindow (ActionEvent event){
         displayTextArea.appendText("New Window feature is not implemented yet \n");
         System.out.println("New Window feature is not implemented yet");
+        /*try{
+            Parent root = FXMLLoader.load(getClass().getResource("vue/UI.fxml"));
+            
+            Stage newStage = new Stage();
+            newStage.setScene(new Scene(root));
+            newStage.setTitle("ScreenShooter");
+            newStage.setResizable(true);
+            newStage.centerOnScreen();
+            newStage.setOnCloseRequest(new EventHandler<WindowEvent>() {	//capture stops when closing main window
+            @Override
+            public void handle(WindowEvent t) {
+                newController.stopCapture(new ActionEvent());    //Is this line really useful ?
+                Platform.exit();
+                System.exit(0);
+            }
+        });  
+            newStage.show();
+        }catch(IOException e){
+            displayTextArea.appendText("Pb when opening new Window");
+        }*/
     }
 
     /**
@@ -383,6 +406,10 @@ public class MainController implements Initializable {
         return displayTextArea;
     }
 
+    /**
+     * Getter of the ScreenShooter object atttribute
+     * @return (ScreenShooter) sc
+     */
     public ScreenShooter getScreenShooter (){
         return sc;
     }

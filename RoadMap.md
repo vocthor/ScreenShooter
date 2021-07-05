@@ -8,7 +8,7 @@
 
 
 ## TO DO
-
+* BETTER FILE DIRECTORY, ... ERROR HANDLING
 * JavaDoc
 * Small start, stop, pause, ... images
 
