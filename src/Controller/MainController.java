@@ -12,7 +12,6 @@ import java.util.TimerTask;
 
 import Model.ScreenShooter;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,11 +24,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.application.Platform;
 
 
 /**
@@ -238,7 +235,7 @@ public class MainController implements Initializable {
      */
     @FXML
     void newWindow (ActionEvent event){
-        displayTextArea.appendText("New Window feature is not implemented yet \n");
+        displayTextArea.appendText("New Window feature is not implemented yet (and will probably never be)\n");
         System.out.println("New Window feature is not implemented yet");
         /*try{
             Parent root = FXMLLoader.load(getClass().getResource("vue/UI.fxml"));
