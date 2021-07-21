@@ -102,13 +102,13 @@ public class MainController implements Initializable {
         lockParameters(true);                                                  //Locks parameters
         if (transpStage!=null) transpStage.close();                            //and automatically close the Select Area window
         displayTextArea.appendText("[START] \n");
-        System.out.println("[START]");
+        //System.out.println("[START]");
         time = new Timer();
         time.schedule (new TimerTask(){
             public void run () {
                 sc.capture();
                 displayTextArea.appendText("[RUNNING] " + sc.getDate()+"_"+sc.getName()+"_"+(sc.getNum()-1) + ".jpg  stored in \"" + sc.getPath() + "\" \n");
-                System.out.println("[RUNNING] " + sc.getDate()+"_"+sc.getName()+"_"+(sc.getNum()-1) + ".jpg  stored in \"" + sc.getPath() + "\"" );
+                //System.out.println("[RUNNING] " + sc.getDate()+"_"+sc.getName()+"_"+(sc.getNum()-1) + ".jpg  stored in \"" + sc.getPath() + "\"" );
             }
         },0,sc.getPeriod());
     }
@@ -123,11 +123,11 @@ public class MainController implements Initializable {
         if(pathFile.isDirectory() && pathFile.canWrite()){      //Is it better to use try-catch ?
             sc.setPath(pathTextField.getText());
             displayTextArea.appendText("    Path set to \""+sc.getPath()+"\" \n");
-            System.out.println("Path set to \""+sc.getPath()+"\"");
+            //System.out.println("Path set to \""+sc.getPath()+"\"");
             startCaptureButton.setDisable(false);
         }else {
             displayTextArea.appendText("The directory is either inaccessible either unwritable ! \n");
-            System.out.println("The directory is either inaccessible either unwritable !");
+            //System.out.println("The directory is either inaccessible either unwritable !");
         }
     }
 
@@ -152,7 +152,7 @@ public class MainController implements Initializable {
     void chosenName (ActionEvent event){
         sc.setName(nameTextField.getText());
         displayTextArea.appendText("    Name set to \""+sc.getName() +"\" \n");
-        System.out.println("Name set to \""+sc.getName() +"\"");
+        //System.out.println("Name set to \""+sc.getName() +"\"");
     }
 
     /**
@@ -163,7 +163,7 @@ public class MainController implements Initializable {
     void capturePeriod (ActionEvent event){
         sc.setPeriod(capturePeriodSpinner.getValue());
         displayTextArea.appendText("    Capture period set to " + sc.getPeriod() + " millisecond(s) \n");
-        System.out.println("Capture period set to " + sc.getPeriod() + " millisecond(s)");
+        //System.out.println("Capture period set to " + sc.getPeriod() + " millisecond(s)");
     }
 
     /**
@@ -198,7 +198,7 @@ public class MainController implements Initializable {
     @FXML
     void pauseCapture (ActionEvent event){
         displayTextArea.appendText("[PAUSE] \n");
-        System.out.println("[PAUSE]");
+        //System.out.println("[PAUSE]");
         time.cancel();
         pauseCaptureButton.setDisable(true);
         startCaptureButton.setDisable(false);
@@ -213,11 +213,11 @@ public class MainController implements Initializable {
     @FXML
     public void stopCapture (ActionEvent event){
         displayTextArea.appendText("[STOP] The parameters are now reset \n");
-        System.out.println("[STOP]");
+        //System.out.println("[STOP]");
         try{        //in case you close the window without starting the capture even once
             time.cancel();
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
         }
         pauseCaptureButton.setDisable(true);
         stopCaptureButton.setDisable(true);
@@ -236,7 +236,7 @@ public class MainController implements Initializable {
     @FXML
     void newWindow (ActionEvent event){
         displayTextArea.appendText("New Window feature is not implemented yet (and will probably never be)\n");
-        System.out.println("New Window feature is not implemented yet");
+        //System.out.println("New Window feature is not implemented yet");
         /*try{
             Parent root = FXMLLoader.load(getClass().getResource("vue/UI.fxml"));
             

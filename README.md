@@ -4,13 +4,13 @@
 ## Introduction
 
 This program was made by [@vocthor](https://github.com/vocthor/).
-Its purpose is to take screen captures periodically.
+Its purpose is to take screen captures periodically by itself.
 
 
 ## Disclaimer
 
 This program is made 100% in Java. 
-This program is still in development, and i'm not a genius. I am not responsible for a bad use (even if there should'nt be one). If you discover a new bug, problem, ... or have an idea for a new feature, please report it.
+This program was a 1-2 weeks project, and i'm still a student. I am not responsible for a bad use (even if I don't see how you could use it in a "bad" way). If you discover a new bug, problem, ... or have an idea for new features, please report it.
 A lot of features are not implemented yet, and are still in development, but for now this program is functional for a basic use.
 
 
@@ -53,6 +53,4 @@ A lot of features are not implemented yet, and are still in development, but for
 
 * `New Window` button
 * `Capture` tab
-* Better console
 
-(and don't mind the App.java file)

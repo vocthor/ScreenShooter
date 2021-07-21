@@ -4,12 +4,12 @@
     "F:\INFO\JAVA\ScreenShotProject\Output\"
     "G:\INFO\JAVA\ScreenShotProject\Output\"
 * Taking captures of a specific screen zone
+* JavaDoc
 
 
 
 ## TO DO
 * BETTER FILE DIRECTORY, ... ERROR HANDLING
-* JavaDoc
 * Small start, stop, pause, ... images
 
 * Tab at the bottom with 2 tabs :

@@ -18,14 +18,25 @@ import javax.imageio.ImageIO;
  * @author vocthor
  */
 public class ScreenShooter {
-    private String path;        //where to store the captures
-    private String name;        //generic name of the current capture session
-    private int number;         //id for distinguishing the captures of a same capture session
-    private int period;         //time in millisecond between each capture
-    
+
     /**
-     * Bunch of object used to create the capture and store it
+     * Where to store the captures
      */
+    private String path; 
+    /**
+     * generic name of the current capture session
+     */
+    private String name;  
+    /**
+     *  id for distinguishing the captures of a same capture session
+     */      
+    private int number;         
+    /**
+     * time in millisecond between each capture
+     */
+    private int period;         
+    
+    
     private Robot robot;
     private Rectangle rect;
     private SimpleDateFormat simpleDateFormat;
