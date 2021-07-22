@@ -270,7 +270,7 @@ public class MainController implements Initializable {
             try{             //In case of a transparent is already opened
                 transpStage.close();
             }catch(Exception e){}
-            FXMLLoader transpLoader = new FXMLLoader(getClass().getResource("../View/TransparentWindow.fxml"));
+            FXMLLoader transpLoader = new FXMLLoader(getClass().getResource("/View/TransparentWindow.fxml"));
             Parent root1 = (Parent) transpLoader.load();
             TransparentController transpController = transpLoader.getController();
             transpController.setParentController(this);

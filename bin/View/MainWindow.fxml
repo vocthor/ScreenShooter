@@ -65,7 +65,7 @@
 	</HBox>
 	<Pane VBox.vgrow="ALWAYS" />
 
-	<TabPane tabClosingPolicy="UNAVAILABLE" prefHeight="150.0" VBox.vgrow="ALWAYS" maxWidth="Infinity">
+	<TabPane tabClosingPolicy="UNAVAILABLE" prefHeight="150.0" VBox.vgrow="ALWAYS" maxWidth="Infinity" >
 		<Tab text="Console">
 			<TextArea fx:id="displayTextArea" editable="false" />
 		</Tab>

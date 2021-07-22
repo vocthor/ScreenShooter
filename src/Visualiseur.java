@@ -31,7 +31,7 @@ public class Visualiseur extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("View/MainWindow.fxml"));		//bunch of Javafx stuff
+        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/View/MainWindow.fxml"));		//bunch of Javafx stuff
         Parent root = (Parent) mainLoader.load();
         MainController mainController = mainLoader.getController();
         Scene scene = new Scene(root);
